@@ -2,196 +2,157 @@
 
 **Projeto:** Controle de Estoque  
 **Linguagem:** Python  
-**Tipo de aplicação:** Desktop com interface gráfica  
-**Persistência:** Arquivos JSON  
-**Status:** Em levantamento e validação
+**Tipo:** Aplicação desktop com interface gráfica  
+**Persistência inicial:** Arquivos JSON  
+**Status:** Baseline inicial para implementação
 
----
+## 1. Objetivo
 
-# 1. Visão geral
+Desenvolver uma aplicação desktop para gerenciamento de produtos e movimentações de estoque. O sistema deve permitir cadastrar e consultar produtos, registrar entradas e saídas, consultar o histórico de movimentações e acompanhar informações relevantes em um dashboard.
 
-O projeto consiste no desenvolvimento de um sistema desktop para gerenciamento e controle de estoque, permitindo o cadastro e gerenciamento de produtos, registro de movimentações, consulta de disponibilidade e acompanhamento das operações por meio de um dashboard.
+A primeira versão será local e utilizará arquivos JSON. A estrutura deverá isolar a persistência para permitir uma futura substituição por banco de dados.
 
-A aplicação será desenvolvida em Python, utilizando uma interface gráfica para interação com o usuário.
+## 2. Requisitos funcionais
 
-Embora a persistência inicial seja realizada por arquivos JSON, a estrutura interna será planejada para permitir uma futura substituição por um banco de dados, sem exigir alterações significativas nas regras de negócio.
+### RF01 — Cadastro de produtos
+O sistema deve permitir cadastrar produtos com os campos:
+- SKU: obrigatório e único;
+- nome: obrigatório;
+- descrição: opcional;
+- categoria: opcional, texto livre;
+- preço de custo: opcional, não negativo;
+- preço de venda: opcional, não negativo;
+- data de criação: gerada automaticamente;
+- data de atualização: gerada/atualizada automaticamente;
+- status de exclusão lógica;
+- saldo atual: valor derivado das movimentações, mantido como cache para consulta.
 
-# 2. Requisitos funcionais
+O SKU pode ser informado pelo usuário ou gerado pelo sistema. O SKU será normalizado para maiúsculas e terá espaços externos removidos. O SKU não poderá ser alterado pela edição convencional.
 
-## RF01 — Gerenciamento de produtos
+### RF02 — Edição de produtos
+Permitir editar nome, descrição, categoria e preços. Não permitir alterar SKU nem editar diretamente o saldo de estoque.
 
-O sistema deverá permitir:
-
-- Cadastrar novos produtos.
-- Editar informações de produtos existentes.
-- Consultar produtos cadastrados.
-- Excluir produtos por meio de exclusão lógica (*soft delete*).
-
-A exclusão lógica deverá preservar os registros no armazenamento, evitando a remoção definitiva dos dados.
-
-Produtos excluídos não deverão aparecer nas consultas convencionais, salvo quando houver um filtro específico para essa finalidade.
-
-## RF02 — Consulta de estoque
-
-O sistema deverá permitir consultar a quantidade disponível de produtos em estoque.
-
-A consulta deverá oferecer filtros para personalizar os resultados apresentados, permitindo que o usuário escolha quais informações deseja visualizar.
-
-Os filtros e campos disponíveis serão detalhados durante o refinamento dos requisitos.
-
-## RF03 — Gerenciamento de movimentações
-
-O sistema deverá permitir o gerenciamento das movimentações de estoque, contemplando:
-
-- Registro de novas movimentações.
-- Consulta de movimentações existentes.
-- Edição de movimentações.
-- Exclusão de movimentações.
-
-As movimentações deverão representar operações que alteram a quantidade disponível de produtos em estoque.
-
-## RF04 — Movimentação diretamente pela consulta de produtos
-
-Ao consultar um produto, o sistema deverá disponibilizar ações para registrar diretamente uma movimentação de estoque.
-
-O usuário deverá conseguir:
-
-- Registrar uma entrada de produtos.
-- Registrar uma saída de produtos.
-
-A operação deverá estar vinculada ao produto consultado, evitando a necessidade de realizar uma nova seleção manual do produto.
-
-## RF05 — Persistência em arquivos JSON
-
-Nesta primeira versão, o sistema não utilizará um banco de dados.
-
-Os dados serão armazenados em arquivos no formato JSON, permitindo a persistência das informações entre as execuções da aplicação.
-
-**Justificativa:** A utilização de arquivos JSON atende à proposta de um desafio prático, reduzindo a complexidade de configuração e infraestrutura, sem comprometer a possibilidade de evolução futura.
-
-## RF06 — Estrutura preparada para banco de dados
-
-Apesar da utilização de arquivos JSON, a arquitetura deverá considerar uma futura integração com banco de dados.
-
-As regras de negócio não deverão depender diretamente da tecnologia de armazenamento.
-
-Deverá existir uma separação entre:
-
-- Regras de negócio.
-- Camada responsável pelo acesso e persistência dos dados.
-- Interface gráfica.
-
-Na implementação inicial, as operações de persistência serão realizadas por meio de arquivos JSON.
-
-Em uma evolução futura, essa camada poderá ser substituída por uma implementação de banco de dados, preservando, sempre que possível, as demais partes da aplicação.
-
-## RF07 — Dashboard principal
-
-A tela inicial deverá apresentar um dashboard com informações relevantes sobre o estoque.
-
-O dashboard deverá conter:
-
-- Últimas movimentações realizadas.
-- Produtos com quantidade disponível inferior a 5 unidades.
-
-As informações deverão ser atualizadas de acordo com as movimentações registradas no sistema.
-
-## RF08 — Consulta de movimentações
-
-O sistema deverá disponibilizar uma tela ou seção específica para consulta do histórico de movimentações.
-
-O usuário deverá conseguir visualizar as movimentações registradas, permitindo acompanhar as operações realizadas no estoque.
-
-Os critérios de filtragem e as informações apresentadas serão detalhados posteriormente.
-
----
-
-# 3. Requisitos não funcionais
-
-## RNF01 — Interface gráfica
-
-A aplicação deverá possuir uma interface gráfica desktop, permitindo que todas as operações sejam realizadas visualmente.
-
-Não deverá ser necessário utilizar o terminal ou CMD para operar o sistema no uso convencional.
-
-## RNF02 — Persistência de dados
-
-Os dados deverão permanecer disponíveis após o encerramento e a reabertura da aplicação.
-
-A persistência deverá ser realizada por arquivos JSON durante a versão inicial.
-
-## RNF03 — Arquitetura preparada para evolução
-
-A estrutura do software deverá permitir a substituição da persistência JSON por um banco de dados no futuro, minimizando o acoplamento entre as regras de negócio e a camada de armazenamento.
-
-## RNF04 — Distribuição executável
-
-O projeto deverá disponibilizar uma versão executável no formato `.exe`, permitindo que usuários executem a aplicação em máquinas Windows sem a necessidade de instalar Python ou configurar o ambiente de desenvolvimento.
-
-O executável deverá ser disponibilizado na área principal do repositório ou por meio de uma publicação de versão no GitHub.
-
-## RNF05 — Ambiente de desenvolvimento
-
-O projeto também deverá permitir sua execução em ambiente de desenvolvimento utilizando Visual Studio Code.
-
-Deverá existir documentação específica explicando:
-
-- Pré-requisitos para execução.
-- Instalação do Python.
-- Configuração do ambiente virtual.
-- Instalação das dependências.
-- Organização dos arquivos.
-- Como iniciar a aplicação pelo VS Code.
-
-## RNF06 — Manutenibilidade
-
-O código deverá ser organizado em módulos com responsabilidades bem definidas, priorizando:
-
-- Separação de responsabilidades.
-- Reutilização de código.
-- Baixo acoplamento.
-- Facilidade de manutenção.
-- Evitar duplicidade de implementações.
-
-## RNF07 — Integridade dos dados
-
-As operações realizadas deverão preservar a consistência das informações armazenadas.
-
-Alterações em produtos e movimentações deverão refletir corretamente na quantidade disponível em estoque.
-
-## RNF08 — Documentação
-
-O projeto deverá possuir documentação suficiente para explicar seu funcionamento, suas decisões técnicas, sua estrutura e suas formas de execução.
-
----
-
-# 4. Restrições e decisões iniciais
-
-| Item | Definição |
-|---|---|
-| Linguagem | Python |
-| Interface | Aplicação gráfica desktop |
-| Persistência inicial | Arquivos JSON |
-| Banco de dados | Não será utilizado nesta versão |
-| Arquitetura | Preparada para futura integração com banco de dados |
-| Distribuição | Executável Windows `.exe` |
-| Ambiente de desenvolvimento | Visual Studio Code |
-| Interface de operação | Gráfica, sem dependência do CMD |
-
-# 5. Itens pendentes de definição
-
-Os seguintes pontos ainda precisam ser discutidos e aprovados:
-
-- Campos obrigatórios no cadastro de produtos.
-- Critérios e opções de filtragem de produtos.
-- Informações obrigatórias em uma movimentação.
-- Regras para edição e exclusão de movimentações.
-- Validações para entradas e saídas.
-- Critérios de filtragem do histórico.
-- Comportamento de produtos excluídos.
-- Tecnologias e bibliotecas para interface gráfica.
-- Estratégia de armazenamento e organização dos arquivos JSON.
-
----
-
-**Observação:** Este documento representa a primeira versão dos requisitos. Novas definições serão incorporadas conforme o levantamento avançar.
+### RF03 — Consulta e filtros de produtos
+Permitir consultar produtos ativos e, mediante opção específica, produtos excluídos logicamente. Filtros mínimos:
+- SKU;
+- nome;
+- categoria;
+- situação do estoque: todos, zerado ou positivo;
+- incluir produtos excluídos.
+
+Colunas padrão da listagem: SKU, nome, categoria, preço de custo, preço de venda, saldo atual e situação.
+
+### RF04 — Exclusão lógica de produtos
+A exclusão deve ser lógica, sem apagar o registro físico. Produtos excluídos não aparecem nas consultas convencionais e não aceitam novas movimentações. Para preservar a consistência, a exclusão será permitida somente quando o saldo atual for zero. O SKU continuará reservado e não poderá ser reutilizado.
+
+### RF05 — Cadastro de movimentações
+Permitir registrar movimentações dos tipos:
+- ENTRADA;
+- SAÍDA.
+
+Cada movimentação deve conter:
+- identificador único da movimentação;
+- SKU do produto relacionado;
+- tipo;
+- quantidade inteira positiva;
+- observação opcional;
+- data/hora de criação;
+- data/hora da última atualização;
+- status de exclusão lógica.
+
+### RF06 — Movimentação pela consulta de produto
+Na tela/detalhe do produto, disponibilizar ações para registrar entrada ou saída já vinculadas ao produto selecionado.
+
+### RF07 — Regras de estoque
+Entradas aumentam o saldo e saídas diminuem o saldo. O sistema não pode permitir saldo negativo. A quantidade deve ser informada como inteiro maior que zero. O saldo não pode ser alterado diretamente pelo formulário de produto.
+
+### RF08 — Edição de movimentações
+Permitir editar tipo, quantidade e observação de uma movimentação ativa. O produto relacionado (SKU) não poderá ser alterado. Para transferir uma movimentação para outro produto, o usuário deverá cancelar a movimentação original e criar outra.
+
+A edição deve calcular o impacto líquido da alteração e validar que o saldo resultante não seja negativo.
+
+### RF09 — Exclusão lógica de movimentações
+Permitir cancelar uma movimentação por exclusão lógica, preservando o registro. O cancelamento deve reverter seu efeito no saldo. O cancelamento de uma entrada será bloqueado se sua reversão fizer o saldo ficar negativo.
+
+### RF10 — Consulta de movimentações
+Disponibilizar uma tela específica para consultar o histórico, com filtros mínimos:
+- SKU;
+- tipo (entrada/saída);
+- período inicial e final;
+- incluir movimentações canceladas.
+
+Exibir identificador, data/hora, SKU, produto, tipo, quantidade e situação.
+
+### RF11 — Dashboard
+A tela principal deve apresentar:
+- as 10 movimentações mais recentes não canceladas;
+- produtos ativos com saldo inferior a 5 unidades, incluindo saldo zero.
+
+As informações devem refletir as movimentações registradas. Não haverá campo de estoque mínimo configurável nesta versão.
+
+## 3. Requisitos não funcionais
+
+### RNF01 — Interface gráfica
+Todas as operações usuais devem ser realizadas por interface gráfica. O usuário final não deverá precisar operar o sistema pelo CMD ou terminal.
+
+### RNF02 — Leveza e simplicidade
+Priorizar interface limpa, direta e de baixo consumo de recursos. Utilizar Tkinter e ttk, evitando dependências visuais pesadas sem necessidade demonstrada.
+
+### RNF03 — Persistência
+Os dados devem permanecer disponíveis após fechar e reabrir a aplicação. Os arquivos JSON devem ser gravados com tratamento de erros e escrita segura.
+
+### RNF04 — Separação de responsabilidades
+Separar interface, casos de uso/regras de negócio, modelos e persistência. A interface não deve ler ou escrever JSON diretamente.
+
+### RNF05 — Evolução da persistência
+As regras de negócio não devem depender de detalhes de arquivos e caminhos. A implementação JSON deve ficar atrás de contratos/interfaces de repositório para facilitar futura substituição por banco de dados.
+
+### RNF06 — Distribuição Windows
+Entregar um executável Windows que inclua o interpretador Python e dependências necessárias, para que o usuário final não precise instalar Python. A geração do executável deverá ocorrer em ambiente Windows compatível.
+
+### RNF07 — Execução pelo VS Code
+Documentar como instalar Python, criar ambiente virtual, instalar dependências, executar testes e iniciar a aplicação pelo VS Code.
+
+### RNF08 — Qualidade
+Criar testes automatizados para regras de negócio e persistência, incluindo cenários de erro e integridade do saldo.
+
+### RNF09 — Integridade e recuperação
+Índices são estruturas auxiliares e reconstruíveis. Os registros canônicos são a fonte oficial. A aplicação deve detectar e reportar JSON inválido e oferecer estratégia segura de reconstrução de índices.
+
+### RNF10 — Escopo de concorrência
+A primeira versão destina-se a uso local por uma única instância/processo da aplicação. Não promete escrita simultânea multiusuário ou sincronização entre máquinas.
+
+## 4. Restrições e premissas
+- Linguagem: Python 3.11 ou superior, respeitando compatibilidade das dependências escolhidas.
+- Interface: Tkinter + ttk.
+- Persistência: JSON; não utilizar banco de dados nesta versão.
+- Empacotamento: PyInstaller.
+- Sistema-alvo do executável: Windows.
+- Moeda: valores monetários tratados com `Decimal`; serialização JSON como strings decimais com duas casas.
+- Datas: armazenar timestamps ISO 8601 com timezone UTC; exibir em horário local.
+- Quantidade de estoque: inteiro positivo por movimentação.
+- Sem autenticação, perfis, múltiplos depósitos, fornecedores, compras, vendas ou integração externa no MVP, salvo aprovação posterior.
+
+## 5. Critérios de aceite iniciais
+1. É possível cadastrar produto com SKU manual ou automático.
+2. Tentativa de SKU duplicado é rejeitada, inclusive para produto excluído.
+3. É possível editar dados permitidos sem alterar SKU ou saldo diretamente.
+4. Produto pode ser excluído logicamente apenas com saldo zero.
+5. Entrada aumenta saldo e saída diminui saldo.
+6. Saída que gere saldo negativo é rejeitada.
+7. Edição/cancelamento de movimentação atualiza saldo corretamente.
+8. Dashboard mostra as 10 movimentações recentes e produtos ativos com saldo < 5.
+9. Fechar e reabrir a aplicação preserva dados.
+10. Testes automatizados cobrem as regras críticas.
+11. Aplicação inicia pelo VS Code seguindo a documentação.
+12. Executável funciona em Windows sem Python instalado.
+
+## 6. Itens fora do escopo inicial
+- Banco de dados real.
+- Operação multiusuário ou em rede.
+- Controle por filial/depósito.
+- Cadastro de fornecedores.
+- Módulos de compras, vendas ou faturamento.
+- Autenticação e permissões.
+- Estoque mínimo configurável.
+- Importação/exportação avançada, salvo necessidade identificada durante a implementação.
