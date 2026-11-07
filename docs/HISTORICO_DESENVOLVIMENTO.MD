@@ -42,3 +42,29 @@ Refinamento das solicitações em requisitos funcionais e não funcionais, com e
 **Resultado:**
 
 Primeira versão dos requisitos funcionais e não funcionais elaborada, aguardando validação e complementação.
+
+
+### Interação 03 — Definição da identificação de produtos
+
+**Solicitação do usuário:**
+
+Definir o SKU como identificador dos produtos, com suporte à geração automática ou preenchimento manual. O formato deverá ser alfanumérico.
+
+Também foi solicitado um armazenamento separado contendo os identificadores, evitando percorrer todos os registros de produtos para verificar duplicidades.
+
+**Atividade realizada pela IA:**
+
+Refinamento da estratégia de armazenamento, propondo registros individuais, índices auxiliares, particionamento por hash e separação entre identificadores de negócio e nomes físicos dos arquivos.
+
+**Decisões do usuário:**
+
+- Permitir SKU manual e automático.
+- Utilizar formato alfanumérico.
+- Não utilizar estoque mínimo.
+- Manter os registros dos produtos em arquivos separados.
+- Manter um registro exclusivo de identificadores para controle de duplicidade.
+- Priorizar uma estrutura de armazenamento organizada e preparada para crescimento.
+
+**Resultado:**
+
+Estratégia inicial de identificação e armazenamento de produtos definida.
