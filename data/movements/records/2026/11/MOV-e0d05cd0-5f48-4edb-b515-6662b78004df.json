@@ -1,0 +1,11 @@
+{
+  "movement_id": "MOV-e0d05cd0-5f48-4edb-b515-6662b78004df",
+  "sku": "PRD-9C2BBD63",
+  "type": "EXIT",
+  "quantity": 3,
+  "note": null,
+  "created_at": "2026-11-08T00:01:08.985160+00:00",
+  "updated_at": "2026-11-08T00:01:08.985160+00:00",
+  "is_deleted": false,
+  "deleted_at": null
+}

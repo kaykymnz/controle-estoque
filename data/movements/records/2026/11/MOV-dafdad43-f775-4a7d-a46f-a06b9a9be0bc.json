@@ -1,0 +1,11 @@
+{
+  "movement_id": "MOV-dafdad43-f775-4a7d-a46f-a06b9a9be0bc",
+  "sku": "PRD-53F61DE5",
+  "type": "ENTRY",
+  "quantity": 234,
+  "note": null,
+  "created_at": "2026-11-08T00:13:36.817848+00:00",
+  "updated_at": "2026-11-08T00:13:36.817848+00:00",
+  "is_deleted": false,
+  "deleted_at": null
+}
