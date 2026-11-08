@@ -19,20 +19,17 @@ Aplicação desktop local para cadastro de produtos e registro de entradas e sa�
 - pytest
 - PyInstaller para distribuição Windows
 
-## Executável Windows
+## Executável Windows — V1
 
-O executável para usuários finais será disponibilizado na página de [Releases do projeto](https://github.com/kaykymnz/controle-estoque/releases). Ainda não há uma versão publicada para download.
+A versão 1.0 já está disponível para Windows.
 
-Para publicar a primeira versão:
+1. Acesse a página de [Releases](https://github.com/kaykymnz/controle-estoque/releases).
+2. Baixe o arquivo `ControleEstoque.exe` da versão V1.
+3. Salve o arquivo em uma pasta de sua preferência e execute-o.
 
-1. Gere e valide o executável Windows. Os arquivos e artefatos locais de build ficam em `dir_exe/`, que é ignorada pelo Git e não faz parte do repositório.
-2. No GitHub, abra **Releases** e escolha **Draft a new release**.
-3. Crie/escolha a tag `v0.1.0`, correspondente à versão atual do projeto, e selecione a branch/commit da primeira versão.
-4. Informe o título da release, por exemplo `Controle de Estoque v0.1.0`.
-5. Anexe `ControleEstoque.exe` como arquivo da release. Não adicione o binário ao commit nem ao histórico Git.
-6. Revise as notas e publique a release. O link de Releases acima passa a mostrar a versão para download.
+Não é necessário instalar Python ou as dependências do projeto para utilizar o executável.
 
-O executável deve ser gerado em Windows e inclui o Python para que a máquina de destino não precise instalá-lo. Os dados ficam fora do programa em `%LOCALAPPDATA%\ControleEstoque\data`.
+Os dados são armazenados separadamente do programa, em `%LOCALAPPDATA%\ControleEstoque\data`. Assim, é possível atualizar o executável sem perder os dados cadastrados.
 
 ## Executar pelo VS Code
 
