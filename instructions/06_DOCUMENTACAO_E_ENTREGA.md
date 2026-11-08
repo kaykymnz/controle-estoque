@@ -56,6 +56,9 @@ Fornecer comandos específicos para Windows PowerShell e, se simples, alternativ
 - Dados ficam fora do executável, em diretório gravável do usuário.
 - Testar o binário em Windows sem Python instalado.
 - Preferir anexar o executável a uma GitHub Release e colocar link claro no README; não versionar grandes binários de build no histórico Git sem necessidade.
+- Manter configuração, dependências, automação do PyInstaller, ambiente virtual, intermediários e executável em `dir_exe/`; ignorar toda essa pasta no Git.
+- Publicar o executável como anexo de uma GitHub Release, não como commit nem arquivo rastreado no repositório.
+- Documentar com clareza a diferença entre build local e release publicada. Não afirmar compatibilidade sem teste do executável em Windows sem Python instalado.
 
 ## Relato final
 

@@ -27,7 +27,6 @@
 ## Testes mínimos
 
 ### Produtos
-- criar com SKU manual;
 - criar com SKU automático;
 - normalização de SKU;
 - rejeitar SKU duplicado;

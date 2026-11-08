@@ -3,7 +3,7 @@
 ## Produtos
 
 - SKU obrigatório, único e normalizado para maiúsculas; remover espaços externos.
-- Permitir SKU manual ou automático.
+- SKU sempre automático; não aceitar preenchimento manual.
 - SKU automático no formato `PRD-XXXXXXXX`, oito caracteres hexadecimais maiúsculos derivados de UUID; consultar índice e repetir geração se houver colisão.
 - SKU não pode ser alterado na edição convencional.
 - Nome obrigatório.
@@ -40,7 +40,7 @@ O campo `current_stock` no produto é cache derivado, não fonte oficial. Criar 
 
 ## Dashboard
 
-- Mostrar as 10 movimentações mais recentes não canceladas.
+- Mostrar as 5 movimentações mais recentes não canceladas.
 - Mostrar produtos ativos com saldo estritamente inferior a 5; inclui zero.
 - Não existe configuração de estoque mínimo por produto.
 

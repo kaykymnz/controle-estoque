@@ -17,7 +17,7 @@ Regras inegociáveis:
 - JSON como persistência inicial; não introduzir banco de dados.
 - Interface gráfica; não criar fluxo principal de terminal.
 - UI não acessa JSON diretamente.
-- SKU manual ou automático, único, normalizado e reservado após soft delete.
+- SKU automático, único, normalizado e reservado após soft delete.
 - Movimentações ativas são a fonte oficial do saldo.
 - Nunca permitir estoque negativo.
 - Produtos e movimentações usam exclusão lógica.

@@ -1,3 +1,4 @@
+import os
 import sys
 from pathlib import Path
 
@@ -13,7 +14,11 @@ def project_root() -> Path:
 def resolve_data_dir() -> Path:
     """Resolve o diretório gravável conforme desenvolvimento ou executável."""
     if getattr(sys, "frozen", False):
-        local_app_data = Path.home() / "AppData" / "Local"
+        local_app_data = (
+            Path(os.environ["LOCALAPPDATA"])
+            if os.environ.get("LOCALAPPDATA")
+            else Path.home() / "AppData" / "Local"
+        )
         return local_app_data / APP_NAME / "data"
     return project_root() / "data"
 

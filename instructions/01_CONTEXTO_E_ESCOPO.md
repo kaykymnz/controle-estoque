@@ -12,7 +12,7 @@ Tecnologia visual aprovada: **Tkinter + ttk**. Não adotar PySide6, Electron, na
 
 ## Funcionalidades do MVP
 
-1. Cadastrar produto com SKU manual ou automático.
+1. Cadastrar produto com SKU automático.
 2. Editar dados permitidos do produto.
 3. Consultar produtos com filtros.
 4. Excluir produto logicamente, somente com saldo zero.
@@ -20,7 +20,7 @@ Tecnologia visual aprovada: **Tkinter + ttk**. Não adotar PySide6, Electron, na
 6. Acessar ações de entrada/saída pela tela de detalhe/consulta do produto.
 7. Editar e cancelar movimentações com recálculo consistente do saldo.
 8. Consultar histórico de movimentações com filtros.
-9. Dashboard com 10 movimentações recentes e produtos ativos com saldo inferior a 5.
+9. Dashboard com 5 movimentações recentes e produtos ativos com saldo inferior a 5.
 10. Persistir dados em arquivos JSON.
 11. Executar pelo VS Code e gerar executável Windows.
 

@@ -59,6 +59,14 @@ Na versão empacotada Windows, usar:
 
 Nunca gravar dados operacionais dentro da pasta temporária do PyInstaller ou depender de escrita ao lado do executável.
 
+O código usa a variável de ambiente `LOCALAPPDATA` em execução empacotada. Se ela não estiver definida, usa `%USERPROFILE%/AppData/Local` como fallback.
+
+## 4.1 Empacotamento Windows
+
+Os arquivos e artefatos locais de build ficam em `dir_exe/`, pasta ignorada pelo Git e não distribuída no código-fonte. A geração do executável é uma atividade de preparação da release feita pelo mantenedor em Windows; os scripts locais não fazem parte do clone do repositório.
+
+O executável `ControleEstoque.exe` é anexado à GitHub Release, não versionado no repositório. O PyInstaller usa modo de arquivo único e sem console. O pacote não inclui `data/`; a aplicação cria/usa o diretório de dados do usuário.
+
 ## 5. Estrutura lógica de dados
 
 ```text
@@ -161,3 +169,4 @@ Ao criar/editar/cancelar movimentação, validar o saldo resultante antes de con
 - MVP não suporta gravações simultâneas multiusuário.
 - Índices e caches precisam de verificação/reconstrução.
 - Para escala ou uso multiusuário, migrar para banco de dados; não tentar transformar JSON em banco completo.
+- O build local não substitui o teste de instalação/execução em um Windows limpo sem Python.

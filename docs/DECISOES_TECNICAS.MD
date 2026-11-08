@@ -27,7 +27,7 @@ Este documento registra decisões aprovadas e suas justificativas. Mudanças pos
 **Justificativa:** evitar regravação de um único JSON grande para atualizações individuais e facilitar localização e recuperação.
 
 ## DT007 — SKU como identificador de negócio
-**Decisão:** SKU é o identificador único do produto; pode ser manual ou automático.  
+**Decisão:** SKU é o identificador único do produto. A modalidade manual foi substituída pela DT025; o SKU é sempre automático.
 **Regras:** normalizar para maiúsculas e remover espaços externos; aceitar formato alfanumérico com separadores permitidos; SKU imutável na edição convencional; SKU não é liberado após exclusão lógica.
 
 ## DT008 — SKU automático
@@ -95,6 +95,26 @@ Este documento registra decisões aprovadas e suas justificativas. Mudanças pos
 **Decisão:** utilizar `pytest` como única ferramenta de testes automatizados.
 **Justificativa:** decisão expressa do usuário; sua sintaxe concisa atende bem aos testes unitários e de persistência do MVP.
 
+## DT025 — SKU exclusivamente automático
+**Decisão:** o SKU será sempre gerado pelo sistema; o cadastro não aceita SKU manual.
+**Justificativa:** alteração aprovada pelo usuário para simplificar o cadastro e preservar a identificação única.
+
+## DT026 — Resumo do dashboard
+**Decisão:** exibir as 5 últimas movimentações ativas sob “Últimas movimentações” e os produtos ativos com saldo menor que 5 sob “Produtos com saldo baixo”.
+**Justificativa:** alteração aprovada pelo usuário para um dashboard mais conciso e legível.
+
 ## DT024 — Arquivo JSON inválido
 **Decisão:** quando um arquivo JSON estiver inválido ou não puder ser lido, interromper a operação afetada e informar claramente o caminho do arquivo. Não tentar corrigir ou sobrescrever automaticamente o registro.
 **Justificativa:** preservar a evidência para correção segura e evitar perda de dados causada por uma recuperação especulativa.
+
+## DT027 — Arquivos de distribuição isolados
+**Decisão:** manter os arquivos de configuração e automação do PyInstaller, o ambiente virtual, os artefatos intermediários e o executável em `dir_exe/`, pasta local ignorada integralmente pelo Git.
+**Justificativa:** separar a preparação local da distribuição do código-fonte versionado; o executável será publicado como anexo de uma GitHub Release.
+
+## DT028 — Diretório de dados do executável
+**Decisão:** em modo empacotado, usar `LOCALAPPDATA` para localizar `%LOCALAPPDATA%/ControleEstoque/data`, com fallback para `AppData/Local` dentro da pasta do usuário quando a variável não existir. Em desenvolvimento, continuar usando `data/` na raiz do projeto.
+**Justificativa:** manter dados do usuário fora da pasta de instalação e do diretório temporário do PyInstaller, como definido na DT017.
+
+## DT029 — Build Windows local e publicação
+**Decisão:** gerar localmente em Windows um executável `--onefile --windowed`; não incluir os scripts nem o executável no repositório. Distribuir o binário como anexo de uma GitHub Release.
+**Justificativa:** manter o repositório de código separado do artefato de download e não versionar binários de build.
