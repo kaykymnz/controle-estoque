@@ -1,0 +1,11 @@
+{
+  "movement_id": "MOV-18a1c32d-a82d-4f69-835e-84762b5df9fc",
+  "sku": "PRD-9C2BBD63",
+  "type": "ENTRY",
+  "quantity": 11,
+  "note": null,
+  "created_at": "2026-11-08T00:01:00.388640+00:00",
+  "updated_at": "2026-11-08T00:01:00.388640+00:00",
+  "is_deleted": false,
+  "deleted_at": null
+}

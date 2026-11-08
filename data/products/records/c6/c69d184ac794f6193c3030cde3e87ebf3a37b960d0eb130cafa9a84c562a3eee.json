@@ -1,0 +1,13 @@
+{
+  "sku": "PRD-53F61DE5",
+  "name": "Memoria ram",
+  "description": null,
+  "category": "Hardware",
+  "cost_price": null,
+  "sale_price": null,
+  "current_stock": 234,
+  "created_at": "2026-11-08T00:13:20.646541+00:00",
+  "updated_at": "2026-11-08T00:13:36.833005+00:00",
+  "is_deleted": false,
+  "deleted_at": null
+}
